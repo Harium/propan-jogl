@@ -10,11 +10,11 @@
     <packaging>jar</packaging>
     <name>Propan JoGL</name>
     <description>Propan backend based on JoGL</description>
-    <url>http://github.com/harium/database-core</url>
+    <url>http://github.com/harium/propan-jogl</url>
     <scm>
-        <connection>scm:git:git://github.com/harium/database-core.git</connection>
-        <developerConnection>scm:git:ssh://github.com:harium/database-core.git</developerConnection>
-        <url>http://github.com/harium/database-core/tree/master</url>
+        <connection>scm:git:git://github.com/harium/propan-jogl.git</connection>
+        <developerConnection>scm:git:ssh://github.com:harium/propan-jogl.git</developerConnection>
+        <url>http://github.com/harium/propan-jogl/tree/master</url>
     </scm>
     <licenses>
         <license>
