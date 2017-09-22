@@ -3,8 +3,9 @@ package com.harium.propan.core.context;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.commons.context.Context;
 import com.harium.etyl.core.graphics.Graphics;
+import com.harium.propan.commons.context.PropanApplication;
 
-public abstract class ApplicationWrapper extends ApplicationGL implements PropanAplication {
+public abstract class ApplicationWrapper extends ApplicationGL implements PropanApplication {
 	
 	protected Application application;
 	

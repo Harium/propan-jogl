@@ -4,11 +4,12 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.harium.etyl.commons.context.Application;
 import com.harium.etyl.core.graphics.Graphics;
+import com.harium.propan.commons.context.PropanApplication;
 import com.harium.propan.core.graphics.AWTGraphics3D;
 import com.harium.propan.core.graphics.Graphics3D;
 import com.jogamp.opengl.GL2;
 
-public abstract class ApplicationGL extends Application implements PropanAplication {
+public abstract class ApplicationGL extends Application implements PropanApplication {
 		
 	protected double zoom = 1;
 	
