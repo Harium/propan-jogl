@@ -49,26 +49,30 @@ public class LogoApplication extends ApplicationGL {
         model.addVertex(new Vector3(3.0f, 7.8f, 1));
 
         // Upper Right Part
-        model.addVertex(new Vector3(4.2f,0,0));
-        model.addVertex(new Vector3(7.2f,1.8f,0));
-        model.addVertex(new Vector3(7.2f,3.3f,0));
-        model.addVertex(new Vector3(4.2f,3.3f,0));
+        model.addVertex(new Vector3(4.2f, 0, 0));
+        model.addVertex(new Vector3(7.2f, 1.8f, 0));
+        model.addVertex(new Vector3(7.2f, 3.3f, 0));
+        model.addVertex(new Vector3(4.2f, 3.3f, 0));
 
-        model.addVertex(new Vector3(4.2f,0,1));
-        model.addVertex(new Vector3(7.2f,1.8f,1));
-        model.addVertex(new Vector3(7.2f,3.3f,1));
-        model.addVertex(new Vector3(4.2f,3.3f,1));
+        model.addVertex(new Vector3(4.2f, 0, 1));
+        model.addVertex(new Vector3(7.2f, 1.8f, 1));
+        model.addVertex(new Vector3(7.2f, 3.3f, 1));
+        model.addVertex(new Vector3(4.2f, 3.3f, 1));
 
         // Bottom Right Part
-        model.addVertex(new Vector3(4.2f,4.5f,0));
-        model.addVertex(new Vector3(7.2f,4.5f,0));
-        model.addVertex(new Vector3(7.2f,6.0f,0));
-        model.addVertex(new Vector3(4.2f,7.8f,0));
+        model.addVertex(new Vector3(4.2f, 4.5f, 0));
+        model.addVertex(new Vector3(7.2f, 4.5f, 0));
+        model.addVertex(new Vector3(7.2f, 6.0f, 0));
+        model.addVertex(new Vector3(4.2f, 7.8f, 0));
 
-        model.addVertex(new Vector3(4.2f,4.5f,1));
-        model.addVertex(new Vector3(7.2f,4.5f,1));
-        model.addVertex(new Vector3(7.2f,6.0f,1));
-        model.addVertex(new Vector3(4.2f,7.8f,1));
+        model.addVertex(new Vector3(4.2f, 4.5f, 1));
+        model.addVertex(new Vector3(7.2f, 4.5f, 1));
+        model.addVertex(new Vector3(7.2f, 6.0f, 1));
+        model.addVertex(new Vector3(4.2f, 7.8f, 1));
+
+        for (Vector3 vector3 : model.getVertices()) {
+            vector3.x = vector3.x - 3.9f;
+        }
 
         Group left = new Group("left");
         Group right = new Group("right");
