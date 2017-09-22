@@ -32,8 +32,8 @@ public class LogoApplication extends ApplicationGL {
     }
 
     public void init(Graphics3D graphics) {
-        view = new FlyView(0, 3.6f, -10);
-        view.getAim().setAngleY(180);
+        view = new FlyView(0, 3.6f, 10);
+        //view.getAim().setAngleY(180);
 
         Model model = new Model();
 
@@ -79,8 +79,8 @@ public class LogoApplication extends ApplicationGL {
 
         // Left Side
         // Front
-        left.getFaces().add(new Face(3).addVertexes(0, 1, 3));
-        left.getFaces().add(new Face(3).addVertexes(1, 2, 3));
+        left.getFaces().add(new Face(3).addVertexes(3, 1, 0));
+        left.getFaces().add(new Face(3).addVertexes(3, 2, 1));
         // Back
         left.getFaces().add(new Face(3).addVertexes(4, 5, 7));
         left.getFaces().add(new Face(3).addVertexes(5, 6, 7));
@@ -99,23 +99,22 @@ public class LogoApplication extends ApplicationGL {
         // Upper Front
         right.getFaces().add(new Face(3).addVertexes(8, 9, 11));
         right.getFaces().add(new Face(3).addVertexes(9, 10, 11));
-
         // Upper Back
-        right.getFaces().add(new Face(3).addVertexes(12, 13, 15));
-        right.getFaces().add(new Face(3).addVertexes(13, 14, 15));
+        right.getFaces().add(new Face(3).addVertexes(15, 13, 12));
+        right.getFaces().add(new Face(3).addVertexes(15, 14, 13));
         // Upper Border
-        right.getFaces().add(new Face(3).addVertexes(12, 8, 13));
-        right.getFaces().add(new Face(3).addVertexes(8, 9, 13));
-        right.getFaces().add(new Face(3).addVertexes(13, 9, 14));
-        right.getFaces().add(new Face(3).addVertexes(9, 10, 14));
-        right.getFaces().add(new Face(3).addVertexes(14, 10, 15));
-        right.getFaces().add(new Face(3).addVertexes(10, 11, 15));
-        right.getFaces().add(new Face(3).addVertexes(15, 11, 8));
-        right.getFaces().add(new Face(3).addVertexes(8, 12, 15));
+        right.getFaces().add(new Face(3).addVertexes(13, 8, 12));
+        right.getFaces().add(new Face(3).addVertexes(13, 9, 8));
+        right.getFaces().add(new Face(3).addVertexes(14, 9, 13));
+        right.getFaces().add(new Face(3).addVertexes(14, 10, 9));
+        right.getFaces().add(new Face(3).addVertexes(15, 10, 14));
+        right.getFaces().add(new Face(3).addVertexes(15, 11, 10));
+        right.getFaces().add(new Face(3).addVertexes(8, 11, 15));
+        right.getFaces().add(new Face(3).addVertexes(15, 12, 8));
 
         // Bottom Front
-        right.getFaces().add(new Face(3).addVertexes(16, 17, 19));
-        right.getFaces().add(new Face(3).addVertexes(17, 18, 19));
+        right.getFaces().add(new Face(3).addVertexes(19, 17, 16));
+        right.getFaces().add(new Face(3).addVertexes(19, 18, 17));
         // Bottom Back
         right.getFaces().add(new Face(3).addVertexes(20, 21, 23));
         right.getFaces().add(new Face(3).addVertexes(21, 22, 23));
@@ -133,11 +132,11 @@ public class LogoApplication extends ApplicationGL {
         model.getGroups().add(right);
 
         OBJMaterial leftMaterial = new OBJMaterial();
-        leftMaterial.setKd(new Vector3(0x0, 0x71, 0xbc));
+        leftMaterial.setKd(new Vector3(0x0 / 255f, 0x71 / 255f, 0xbc / 255f));
         left.setMaterial(leftMaterial);
 
         OBJMaterial rightMaterial = new OBJMaterial();
-        rightMaterial.setKd(new Vector3(0x29, 0xab, 0xe2));
+        rightMaterial.setKd(new Vector3(0x29 / 255f, 0xab / 255f, 0xe2 / 255f));
         right.setMaterial(rightMaterial);
 
         try {
