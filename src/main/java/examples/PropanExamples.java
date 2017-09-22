@@ -3,6 +3,7 @@ package examples;
 import com.harium.propan.Propan;
 import com.harium.propan.core.context.ApplicationGL;
 import examples.collision.OrientedBoxCollision;
+import examples.tutorial3.SimpleMeshExample;
 
 public class PropanExamples extends Propan {
 
@@ -23,10 +24,10 @@ public class PropanExamples extends Propan {
 	public ApplicationGL startApplication() {
 		initialSetup("");
 
-		return new OrientedBoxCollision(w, h);
+		//return new OrientedBoxCollision(w, h);
 		//return new MixedRenderingExample(w, h);
 		//return new OrthographicDrawingExample(w, h);
-		//return new SimpleMeshExample(w, h);
+		return new SimpleMeshExample(w, h);
 		//return new BillboardExample(w, h);
 		//return new RotateAroundExample(w, h);
 		//return new Perspective(w, h);
