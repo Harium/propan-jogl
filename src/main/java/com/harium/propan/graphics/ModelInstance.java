@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.harium.propan.core.graphics.AWTGraphics3D;
 import com.harium.propan.core.graphics.GLDrawable;
+import com.harium.propan.core.graphics.Graphics3D;
 import com.harium.propan.core.loader.MeshLoader;
 import com.harium.propan.core.model.Face;
 import com.harium.propan.core.model.Group;
@@ -317,8 +318,9 @@ public class ModelInstance extends Shape implements GLDrawable {
     }
 
     @Override
-    public void draw(AWTGraphics3D g) {
-        GL2 gl = g.getGL2();
+    public void draw(Graphics3D g) {
+        AWTGraphics3D graphics = (AWTGraphics3D) g;
+        GL2 gl = graphics.getGL2();
 
         gl.glPushMatrix();
         setupTextureAttribs(gl);

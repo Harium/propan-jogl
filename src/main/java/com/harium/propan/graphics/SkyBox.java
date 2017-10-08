@@ -1,5 +1,6 @@
 package com.harium.propan.graphics;
 
+import com.harium.propan.core.graphics.Graphics3D;
 import com.jogamp.opengl.GL2;
 
 import com.harium.etyl.linear.Point3D;
@@ -24,8 +25,9 @@ public class SkyBox extends Point3D implements GLDrawable {
 	}
 
 	@Override
-	public void draw(AWTGraphics3D g) {
-		GL2 gl = g.getGL2();
+	public void draw(Graphics3D g) {
+		AWTGraphics3D graphics = (AWTGraphics3D) g;
+		GL2 gl = graphics.getGL2();
 		
 		texture.enable(gl);
 		texture.bind(gl);
