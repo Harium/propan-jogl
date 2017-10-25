@@ -15,13 +15,11 @@ import java.util.concurrent.Executors;
 
 import com.harium.etyl.commons.context.Session;
 import com.harium.etyl.core.EtylFrame;
-import com.harium.propan.loader.GISInfoLoader;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import com.harium.propan.core.loader.AnimationLoader;
 import com.harium.propan.core.loader.MeshLoader;
@@ -74,8 +72,6 @@ public class GLCore extends BaseCore implements GLEventListener, Runnable {
 
 	private boolean changeApp = false;
 
-	public JPanel glass;
-	
 	private Set<Loader> loaders = new HashSet<Loader>();
 	
 	private static final Font DEFAULT_FONT = new Font("ARIAL", Font.PLAIN, 14);
@@ -108,7 +104,6 @@ public class GLCore extends BaseCore implements GLEventListener, Runnable {
 		loaders.add(TextureLoader.getInstance());
 		loaders.add(MeshLoader.getInstance());
 		loaders.add(AnimationLoader.getInstance());
-		loaders.add(GISInfoLoader.getInstance());
 	}
 
 	public void setComponent(JFrame frame) {
