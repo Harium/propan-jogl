@@ -36,7 +36,7 @@ public abstract class Propan {
 	protected int w = 640;
 	protected int h = 480;
 
-	protected GLCore luviaCore;
+	protected GLCore glCore;
 	
 	protected JFrame frame;
 	
@@ -52,12 +52,12 @@ public abstract class Propan {
 		this.w = w;
 		this.h = h;
 		
-		luviaCore = new GLCore(w, h);
+		glCore = new GLCore(w, h);
 		addModules();
-		luviaCore.initMonitors(w, h);
+		glCore.initMonitors(w, h);
 		
 		frame = createFrame(w, h);
-		luviaCore.setComponent(frame);
+		glCore.setComponent(frame);
 
 		initialSetup("");
 		
@@ -65,7 +65,7 @@ public abstract class Propan {
 	}
 	
 	protected void addModule(Module module) {
-		luviaCore.addModule(module);
+		glCore.addModule(module);
 	}
 
 	private void addModules() {
@@ -75,7 +75,7 @@ public abstract class Propan {
 	}
 	
 	protected void setPath(String path) {
-		luviaCore.setPath(path);
+		glCore.setPath(path);
 	}
 	
 	protected JFrame createFrame(int w, int h) {
@@ -87,12 +87,12 @@ public abstract class Propan {
 		frame.setTitle(title);
 		frame.addWindowListener(buildWindowAdapter());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addKeyListener((KeyListener) luviaCore.getKeyboard());
+		frame.addKeyListener((KeyListener) glCore.getKeyboard());
 		
-		luviaCore.setComponent(frame);
+		glCore.setComponent(frame);
 		
 		//frame.setLocation(p);
-		luviaCore.moveToCenter();
+		glCore.moveToCenter();
 		
 		return frame;
 	}
@@ -106,7 +106,7 @@ public abstract class Propan {
 				new Thread() {
 					@Override 
 					public void run() {
-						luviaCore.stop(); // stop the animator loop
+						glCore.stop(); // stop the animator loop
 						System.exit(0);
 					}
 					
@@ -131,14 +131,14 @@ public abstract class Propan {
 		//TODO Update Methods
 		executor = Executors.newSingleThreadScheduledExecutor();
 		
-		future = executor.scheduleAtFixedRate(luviaCore, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
+		future = executor.scheduleAtFixedRate(glCore, UPDATE_DELAY, UPDATE_DELAY, TimeUnit.MILLISECONDS);
 		
-		frame.add(luviaCore.getPanel());
+		frame.add(glCore.getPanel());
 		
 		AWTCore.hideDefaultCursor(frame);
 		updateIcon();
 		
-		luviaCore.start();
+		glCore.start();
 	}
 	
 	private void updateIcon() {
@@ -161,8 +161,8 @@ public abstract class Propan {
 
 	protected void initialSetup(String path) {
 		String directory = PathHelper.currentFileDirectory()+path;
-		luviaCore.setPath(directory);
-		luviaCore.initDefault();
+		glCore.setPath(directory);
+		glCore.initDefault();
 		
 		setupCalled = true;
 	}
@@ -170,7 +170,7 @@ public abstract class Propan {
 	public abstract ApplicationGL startApplication();
 	
 	private void setMainApplication(ApplicationGL applicationGL) {
-		luviaCore.setMainApplication3D(applicationGL);
+		glCore.setMainApplication3D(applicationGL);
 	}
 	
 	protected void setIcon(String icon) {
