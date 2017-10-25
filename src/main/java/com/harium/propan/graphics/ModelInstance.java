@@ -23,11 +23,6 @@ import java.util.Set;
 
 import static com.jogamp.opengl.GL.*;
 
-/**
- * @author yuripourre
- * @license LGPLv3
- */
-
 public class ModelInstance extends Shape implements GLDrawable {
 
     private Model model;
@@ -87,25 +82,18 @@ public class ModelInstance extends Shape implements GLDrawable {
         return model.getVertices();
     }
 
-    public void wireframeRender(GL2 gl) {
-
+    public void renderWireframe(GL2 gl) {
         gl.glPushMatrix();
         // Turn on wireframe mode
         gl.glPolygonMode(GL2.GL_FRONT, GL2.GL_LINE);
-
-        setupColor(gl);
         applyTransform(gl);
 
-        drawTexture = false;
+        // Single Color
+        setupColor(gl);
 
         // Draw Model
         for (Group group : model.getGroups()) {
-
-            for (Face face : group.getFaces()) {
-                gl.glBegin(GL2.GL_TRIANGLE_STRIP);
-                drawFace(gl, face);
-                gl.glEnd();
-            }
+            drawFaces(gl, group, false);
         }
 
         // Turn off wireframe mode
@@ -118,32 +106,25 @@ public class ModelInstance extends Shape implements GLDrawable {
 
         // Turn on fill mode
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-
         applyTransform(gl);
-
-        drawTexture = false;
 
         // Draw Model
         for (Group group : model.getGroups()) {
+            // Color by group
             Vector3 color = group.getMaterial().getKd();
             if (color == null) {
                 setupColor(gl);
             } else {
                 setupColor(gl, color);
             }
-
-            for (Face face : group.getFaces()) {
-                gl.glBegin(GL2.GL_TRIANGLE_STRIP);
-                drawFace(gl, face);
-                gl.glEnd();
-            }
+            drawFaces(gl, group, false);
         }
 
-        // Turn off wireframe mode
+        // Turn off fill mode
         gl.glPopMatrix();
     }
 
-    public void texturedRender(GL2 gl, Set<Face> set) {
+    public void renderTextured(GL2 gl, Set<Face> set) {
         gl.glPushMatrix();
 
         setupTextureAttribs(gl);
@@ -153,33 +134,32 @@ public class ModelInstance extends Shape implements GLDrawable {
         Texture texture = null;
 
         for (Group group : model.getGroups()) {
-
             texture = setupGroup(gl, texture, group);
-            drawSetFaces(gl, group, set);
-
+            drawSetFaces(gl, set, true);
             disableTexture(gl, texture);
         }
 
         gl.glPopMatrix();
     }
 
-    public void texturedRender(GL2 gl) {
+    public void renderTextured(GL2 gl) {
+        gl.glPushMatrix();
+
+        setupTextureAttribs(gl);
         applyTransform(gl);
+        setupColor(gl);
 
-        simpleDraw(gl);
-    }
-
-    public void simpleDraw(GL2 gl) {
         Texture texture = null;
 
         for (Group group : model.getGroups()) {
-
             texture = setupGroup(gl, texture, group);
-
-            drawFaces(gl, group);
-
+            drawFaces(gl, group, true);
             disableTexture(gl, texture);
         }
+
+        resetTextureAttribs(gl);
+
+        gl.glPopMatrix();
     }
 
     private void setupTextureAttribs(GL2 gl) {
@@ -191,34 +171,20 @@ public class ModelInstance extends Shape implements GLDrawable {
         gl.glDisable(GL.GL_CULL_FACE);
     }
 
-    private void drawFaces(GL2 gl, Group group) {
-
+    private void drawFaces(GL2 gl, Group group, boolean drawTextures) {
         for (Face face : group.getFaces()) {
-
-            /*int vertices = face.vertexIndex.length;
-            setupIndexes(vertices);*/
-
             gl.glBegin(GL2.GL_TRIANGLE_FAN);
-            drawTexturedFace(gl, face);
+            drawFace(gl, face, drawTextures);
             gl.glEnd();
         }
     }
 
-    private void drawSetFaces(GL2 gl, Group group, Set<Face> set) {
-
-        for (Face face : group.getFaces()) {
-            if (!set.contains(face)) {
-                continue;
-            }
-           
-            /*int vertices = face.vertexIndex.length;
-            setupIndexes(vertices);*/
-
+    private void drawSetFaces(GL2 gl, Set<Face> set, boolean drawTextures) {
+        for (Face face : set) {
             gl.glBegin(GL2.GL_TRIANGLE_FAN);
-            drawTexturedFace(gl, face);
+            drawFace(gl, face, drawTextures);
             gl.glEnd();
         }
-
     }
 
     private Texture setupTexture(GL2 gl, Texture texture, Group group) {
@@ -285,16 +251,7 @@ public class ModelInstance extends Shape implements GLDrawable {
         gl.glMultMatrixf(transform.val, 0);
     }
 
-    private void drawFace(GL2 gl, Face face) {
-        for (int i = 0; i < face.vertexIndex.length; i++) {
-            int index = face.vertexIndex[i];
-            Vector3 vertex = model.getVertices().get(index);
-            gl.glVertex3f(vertex.x, vertex.y, vertex.z);
-        }
-    }
-
-    private void drawTexturedFace(GL2 gl, Face face) {
-
+    private void drawFace(GL2 gl, Face face, boolean drawTextures) {
         for (int i = 0; i < face.vertexIndex.length; i++) {
             int vertexIndex = face.vertexIndex[i];
 
@@ -304,7 +261,7 @@ public class ModelInstance extends Shape implements GLDrawable {
                 gl.glNormal3f(normal.x, normal.y, normal.x);
             }
 
-            if (drawTexture) {
+            if (drawTextures) {
                 int textureIndex = face.textureIndex[i];
                 if (model.getTextures().size() > textureIndex) {
                     Vector2 texture = model.getTextures().get(textureIndex);
@@ -324,28 +281,22 @@ public class ModelInstance extends Shape implements GLDrawable {
 
         gl.glPushMatrix();
         setupTextureAttribs(gl);
-        texturedRender(gl);
+        renderTextured(gl);
         resetTextureAttribs(gl);
         gl.glPopMatrix();
     }
 
     public void draw(GL2 gl, Set<Face> faces) {
         gl.glEnable(GL.GL_DEPTH_TEST);
-        texturedRender(gl, faces);
-        gl.glDisable(GL.GL_DEPTH_TEST);
-    }
-
-    public void drawAsWireFrame(GL2 gl) {
-        gl.glEnable(GL.GL_DEPTH_TEST);
-        wireframeRender(gl);
+        renderTextured(gl, faces);
         gl.glDisable(GL.GL_DEPTH_TEST);
     }
 
     private Texture setupGroup(GL2 gl, Texture texture, Group group) {
-        //Setup texture
+        // Setup texture
         texture = setupTexture(gl, texture, group);
 
-        //Setup diffuse color
+        // Setup diffuse color
         if (group.getMaterial().getKd() == null) {
             setupColor(gl);
         } else {

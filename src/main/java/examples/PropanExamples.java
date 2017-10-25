@@ -2,6 +2,8 @@ package examples;
 
 import com.harium.propan.Propan;
 import com.harium.propan.core.context.ApplicationGL;
+import examples.box.OctreeClipping;
+import examples.box.OctreeRender;
 import examples.collision.OrientedBoxCollision;
 import examples.tutorial3.SimpleMeshExample;
 
@@ -27,7 +29,7 @@ public class PropanExamples extends Propan {
 		//return new OrientedBoxCollision(w, h);
 		//return new MixedRenderingExample(w, h);
 		//return new OrthographicDrawingExample(w, h);
-		return new SimpleMeshExample(w, h);
+		//return new SimpleMeshExample(w, h);
 		//return new BillboardExample(w, h);
 		//return new RotateAroundExample(w, h);
 		//return new Perspective(w, h);
@@ -39,7 +41,7 @@ public class PropanExamples extends Propan {
 		//return new SkyboxExample(w, h);
 		
 		//return new OctreeRender(w, h);
-		//return new OctreeClipping(w, h);
+		return new OctreeClipping(w, h);
 		//return new FrustrumRender(w, h);
 		
 		//return new CollisionApplication(w, h);

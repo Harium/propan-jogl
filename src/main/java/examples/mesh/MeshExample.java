@@ -80,7 +80,7 @@ public class MeshExample extends ApplicationGL {
 		gl.glEnable(GL.GL_DEPTH_TEST);
 
 		gl.glPushMatrix();
-		stone.texturedRender(gl);
+		stone.renderTextured(gl);
 		gl.glPopMatrix();
 		
 		gl.glPushMatrix();
@@ -88,7 +88,7 @@ public class MeshExample extends ApplicationGL {
 		gl.glEnable(GL.GL_BLEND);
 		gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 		
-		tree.texturedRender(gl);
+		tree.renderTextured(gl);
 		gl.glPopMatrix();
 		
 		//End batch

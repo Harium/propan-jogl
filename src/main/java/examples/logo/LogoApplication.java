@@ -184,7 +184,7 @@ public class LogoApplication extends ApplicationGL {
         g.setColor(Color.BLACK);
         g.drawGrid(1, 150, 150);
 
-        logo.wireframeRender(gl);
+        logo.renderWireframe(gl);
 
         gl.glFlush();
     }
