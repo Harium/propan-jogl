@@ -1,4 +1,4 @@
-package com.harium.propan.core.glg2d;
+package com.harium.propan.glg2d;
 
 import com.jogamp.opengl.GLAutoDrawable;
 

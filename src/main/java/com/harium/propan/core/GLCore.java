@@ -32,8 +32,8 @@ import com.harium.etyl.loader.image.ImageLoader;
 import com.harium.etyl.util.io.IOHelper;
 import com.harium.propan.core.context.ApplicationGL;
 import com.harium.propan.core.context.DefaultLoadApplicationGL;
-import com.harium.propan.core.glg2d.GLG2DPanel;
-import com.harium.propan.core.glg2d.GLGraphics2D;
+import com.harium.propan.glg2d.GLG2DPanel;
+import com.harium.propan.glg2d.GLGraphics2D;
 import com.harium.propan.core.graphics.AWTGraphics3D;
 import com.harium.propan.loader.TextureLoader;
 
